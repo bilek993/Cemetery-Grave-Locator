@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Cemetery Grave Locator</string>
+    <string name="name">Name</string>
+    <string name="birth_date">Birth date</string>
+    <string name="death_date">Death date</string>
+    <string name="location">Location:</string>
+    <string name="latitude">Latitude:</string>
+    <string name="longitude">Longitude:</string>
+    <string name="photo">Photo:</string>
+    <string name="save">save</string>
+    <string name="edit">edit</string>
 </resources>
