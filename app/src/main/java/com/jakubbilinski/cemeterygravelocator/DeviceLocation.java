@@ -72,7 +72,9 @@ public class DeviceLocation {
     }
 
     private void drawMarker(GeoPoint geoPoint) {
-        locationMarker = new Marker(mapView);
+        if (locationMarker == null)
+            locationMarker = new Marker(mapView);
+
         locationMarker.setPosition(geoPoint);
         locationMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
         mapView.getOverlays().add(locationMarker);
