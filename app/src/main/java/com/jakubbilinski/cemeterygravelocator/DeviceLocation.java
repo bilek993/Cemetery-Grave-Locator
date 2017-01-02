@@ -3,12 +3,14 @@ package com.jakubbilinski.cemeterygravelocator;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.util.GeoPoint;
@@ -67,8 +69,34 @@ public class DeviceLocation {
             ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
 
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+        boolean requestedLocation = false;
+
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            requestedLocation = true;
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+        }
+        if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+            requestedLocation = true;
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+        }
+
+        if (!requestedLocation) {
+            showDialogLocationProviderError();
+        }
+    }
+
+    private void showDialogLocationProviderError() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle(context.getString(R.string.no_location_services_title));
+        builder.setMessage(context.getString(R.string.no_location_services));
+
+        builder.setPositiveButton(R.string.ok_capital, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     private void drawMarker(GeoPoint geoPoint) {

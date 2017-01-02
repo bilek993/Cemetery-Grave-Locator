@@ -10,4 +10,7 @@
     <string name="save">save</string>
     <string name="edit">edit</string>
     <string name="set_location">This location will be set as grave location.</string>
+    <string name="ok_capital">OK</string>
+    <string name="no_location_services_title">No services!</string>
+    <string name="no_location_services">Application can\'t find your current location. Please enable location services and try again.</string>
 </resources>
