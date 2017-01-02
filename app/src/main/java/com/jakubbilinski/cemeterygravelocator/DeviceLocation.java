@@ -12,6 +12,8 @@ import android.support.v4.app.ActivityCompat;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.Marker;
 
 /**
  * Created by bilek on 02.01.2017.
@@ -20,13 +22,16 @@ import org.osmdroid.util.GeoPoint;
 public class DeviceLocation {
 
     private LocationManager locationManager;
+    private Marker locationMarker;
 
     private IMapController mapController;
+    private MapView mapView;
     private Context context;
     private Activity activity;
 
-    public DeviceLocation(IMapController mapController, Context context, Activity activity) {
+    public DeviceLocation(IMapController mapController, MapView mapView, Context context, Activity activity) {
         this.mapController = mapController;
+        this.mapView = mapView;
         this.context = context;
         this.activity = activity;
     }
@@ -38,6 +43,7 @@ public class DeviceLocation {
             public void onLocationChanged(Location location) {
                 GeoPoint myPointPosition = new GeoPoint(location);
                 mapController.setCenter(myPointPosition);
+                drawMarker(myPointPosition);
             }
 
             @Override
@@ -63,5 +69,15 @@ public class DeviceLocation {
 
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+    }
+
+    private void drawMarker(GeoPoint geoPoint) {
+        locationMarker = new Marker(mapView);
+        locationMarker.setPosition(geoPoint);
+        locationMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        mapView.getOverlays().add(locationMarker);
+        locationMarker.setTitle(context.getString(R.string.set_location));
+
+        mapView.invalidate();
     }
 }

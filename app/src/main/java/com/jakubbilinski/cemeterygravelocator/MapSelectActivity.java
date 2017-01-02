@@ -33,7 +33,7 @@ public class MapSelectActivity extends AppCompatActivity {
         checkForPermissions();
         enableMaps();
 
-        DeviceLocation deviceLocation = new DeviceLocation(mapController,this,this);
+        DeviceLocation deviceLocation = new DeviceLocation(mapController,map,this,this);
         deviceLocation.getLocation();
     }
 

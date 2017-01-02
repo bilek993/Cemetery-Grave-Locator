@@ -1,5 +1,9 @@
 apply plugin: 'com.android.application'
 
+repositories {
+    maven { url "https://jitpack.io" }
+}
+
 android {
     compileSdkVersion 25
     buildToolsVersion "23.0.2"
@@ -19,6 +23,8 @@ android {
     }
 }
 
+
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -30,5 +36,6 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.1.0'
 
     compile 'com.android.support:design:25.1.0'
-    compile 'org.osmdroid:osmdroid-android:5.6.1'
+
+    compile 'com.github.MKergall:osmbonuspack:6.0'
 }
