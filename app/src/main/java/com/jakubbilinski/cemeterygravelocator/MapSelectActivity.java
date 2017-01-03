@@ -14,27 +14,38 @@ import android.util.Log;
 import android.widget.Toast;
 
 import org.osmdroid.api.IMapController;
+import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.tileprovider.constants.OpenStreetMapTileProviderConstants;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.MapEventsOverlay;
+import org.osmdroid.views.overlay.infowindow.InfoWindow;
 
-public class MapSelectActivity extends AppCompatActivity {
+public class MapSelectActivity extends AppCompatActivity implements MapEventsReceiver {
 
     private LocationManager locationManager;
     private MapView map;
     private IMapController mapController;
+    private MapEventsOverlay mapEventsOverlay;
+    private DeviceLocation deviceLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_select);
 
-        checkForPermissions();
+        PermissionChecker.checkForPermissions(this);
         enableMaps();
+        setOverlay();
 
-        DeviceLocation deviceLocation = new DeviceLocation(mapController,map,this,this);
+        deviceLocation = new DeviceLocation(mapController,map,this,this);
         deviceLocation.getLocation();
+    }
+
+    private void setOverlay() {
+        mapEventsOverlay = new MapEventsOverlay(this, this);
+        map.getOverlays().add(0, mapEventsOverlay);
     }
 
     private void enableMaps() {
@@ -49,10 +60,16 @@ public class MapSelectActivity extends AppCompatActivity {
         mapController.setZoom(20);
     }
 
-    private void checkForPermissions() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+    @Override
+    public boolean singleTapConfirmedHelper(GeoPoint geoPoint) {
+        InfoWindow.closeAllInfoWindowsOn(map);
+        deviceLocation.drawMarker(geoPoint);
+
+        return false;
+    }
+
+    @Override
+    public boolean longPressHelper(GeoPoint geoPoint) {
+        return false;
     }
 }

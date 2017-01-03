@@ -50,17 +50,14 @@ public class DeviceLocation {
 
             @Override
             public void onStatusChanged(String s, int i, Bundle bundle) {
-
             }
 
             @Override
             public void onProviderEnabled(String s) {
-
             }
 
             @Override
             public void onProviderDisabled(String s) {
-
             }
         };
 
@@ -99,7 +96,7 @@ public class DeviceLocation {
         dialog.show();
     }
 
-    private void drawMarker(GeoPoint geoPoint) {
+    public void drawMarker(GeoPoint geoPoint) {
         if (locationMarker == null)
             locationMarker = new Marker(mapView);
 
