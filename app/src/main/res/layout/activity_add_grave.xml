@@ -5,6 +5,8 @@
     android:id="@+id/activity_add_grave"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
     tools:context="com.jakubbilinski.cemeterygravelocator.AddGraveActivity">
 
     <ScrollView
