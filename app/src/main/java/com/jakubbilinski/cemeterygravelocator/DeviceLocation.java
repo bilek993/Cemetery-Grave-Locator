@@ -11,7 +11,6 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
-import android.widget.Toast;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.util.GeoPoint;
