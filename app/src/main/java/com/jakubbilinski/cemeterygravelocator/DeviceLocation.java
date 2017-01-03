@@ -11,6 +11,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
+import android.widget.Toast;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.util.GeoPoint;
@@ -25,6 +26,7 @@ public class DeviceLocation {
 
     private LocationManager locationManager;
     private Marker locationMarker;
+    private boolean locationSaved;
 
     private IMapController mapController;
     private MapView mapView;
@@ -36,6 +38,8 @@ public class DeviceLocation {
         this.mapView = mapView;
         this.context = context;
         this.activity = activity;
+
+        locationSaved = false;
     }
 
     public void getLocation() {
@@ -44,8 +48,20 @@ public class DeviceLocation {
             @Override
             public void onLocationChanged(Location location) {
                 GeoPoint myPointPosition = new GeoPoint(location);
-                mapController.setCenter(myPointPosition);
-                drawMarker(myPointPosition);
+
+                if (!locationSaved) {
+                    drawMarker(myPointPosition);
+                    mapController.setCenter(myPointPosition);
+                    locationSaved = true;
+                } else {
+                    mapController.animateTo(myPointPosition);
+
+                    if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+                        ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                    }
+                    locationManager.removeUpdates(this);
+                }
             }
 
             @Override
