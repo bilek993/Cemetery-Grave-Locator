@@ -11,6 +11,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.widget.Toast;
 
 import org.osmdroid.api.IMapController;
@@ -41,6 +42,12 @@ public class MapSelectActivity extends AppCompatActivity implements MapEventsRec
 
         deviceLocation = new DeviceLocation(mapController,map,this,this);
         deviceLocation.getLocation();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_map_select,menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     private void setOverlay() {

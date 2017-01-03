@@ -13,4 +13,5 @@
     <string name="ok_capital">OK</string>
     <string name="no_location_services_title">No services!</string>
     <string name="no_location_services">Application can\'t find your current location. Please enable location services and try again.</string>
+    <string name="set">Set</string>
 </resources>
