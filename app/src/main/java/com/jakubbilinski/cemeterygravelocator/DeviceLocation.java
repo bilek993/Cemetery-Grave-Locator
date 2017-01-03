@@ -122,4 +122,12 @@ public class DeviceLocation {
 
         mapView.invalidate();
     }
+
+    public GeoPoint getMarkerPosition() {
+        if (locationMarker == null) {
+            return null;
+        } else {
+            return locationMarker.getPosition();
+        }
+    }
 }
