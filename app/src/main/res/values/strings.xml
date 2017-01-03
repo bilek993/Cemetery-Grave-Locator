@@ -15,4 +15,5 @@
     <string name="no_location_services">Application can\'t find your current location. Please enable location services and try again.</string>
     <string name="set">Set</string>
     <string name="new_location_set">New location has been set.</string>
+    <string name="select_img">Select image</string>
 </resources>
