@@ -2,6 +2,8 @@ package com.jakubbilinski.cemeterygravelocator;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,10 +11,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 import java.io.InputStream;
 
@@ -26,6 +31,9 @@ public class AddGraveActivity extends AppCompatActivity {
 
     private TextView textViewLatitude;
     private TextView textViewLongitude;
+    private EditText editTextName;
+    private EditText editTextBirth;
+    private EditText editTextDeath;
     private ImageView imageViewPhoto;
 
     @Override
@@ -36,9 +44,12 @@ public class AddGraveActivity extends AppCompatActivity {
 
         textViewLatitude = (TextView) findViewById(R.id.textViewLatitude);
         textViewLongitude = (TextView) findViewById(R.id.textViewLongitude);
+        editTextName = (EditText) findViewById(R.id.editTextName);
+        editTextBirth = (EditText) findViewById(R.id.editTextBirth);
+        editTextDeath = (EditText) findViewById(R.id.editTextDeath);
         imageViewPhoto = (ImageView) findViewById(R.id.imageViewPhoto);
 
-        setButtons();
+        setButton();
         updateUI();
     }
 
@@ -51,13 +62,17 @@ public class AddGraveActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_item_save_and_add) {
+            DatabaseHelper db = new DatabaseHelper(this);
+            Bitmap bitmap = ((BitmapDrawable)imageViewPhoto.getDrawable()).getBitmap();
+            db.insertGrave(editTextName.getText().toString(),editTextBirth.getText().toString(), editTextDeath.getText().toString(), latitude, longitude, bitmap);
+
             finish();
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private void setButtons() {
+    private void setButton() {
         Button buttonEditLocation = (Button) findViewById(R.id.buttonEditLocation);
         buttonEditLocation.setOnClickListener(new View.OnClickListener() {
             @Override

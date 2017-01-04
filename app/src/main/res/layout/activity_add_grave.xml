@@ -26,7 +26,8 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/name" />
+                    android:hint="@string/name"
+                    android:id="@+id/editTextName" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -37,7 +38,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/birth_date"
-                    android:inputType="date" />
+                    android:inputType="date"
+                    android:id="@+id/editTextBirth" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -48,7 +50,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/death_date"
-                    android:inputType="date" />
+                    android:inputType="date"
+                    android:id="@+id/editTextDeath" />
             </android.support.design.widget.TextInputLayout>
 
             <Space
