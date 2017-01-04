@@ -102,13 +102,6 @@
                 android:id="@+id/buttonEditPhoto"
                 style="@style/Widget.AppCompat.Button.Borderless" />
 
-            <Button
-                android:text="@string/save"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/buttonSave"
-                style="@style/Widget.AppCompat.Button.Colored" />
-
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="15dp" />
