@@ -27,6 +27,7 @@ public class MapSelectActivity extends AppCompatActivity implements MapEventsRec
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_select);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         PermissionChecker.checkForPermissions(this);
         enableMaps();

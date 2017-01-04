@@ -32,6 +32,7 @@ public class AddGraveActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_grave);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         textViewLatitude = (TextView) findViewById(R.id.textViewLatitude);
         textViewLongitude = (TextView) findViewById(R.id.textViewLongitude);
