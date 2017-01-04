@@ -37,6 +37,12 @@ public class MapSelectActivity extends AppCompatActivity implements MapEventsRec
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        deviceLocation.removeUpdates();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_map_select,menu);
         return super.onCreateOptionsMenu(menu);

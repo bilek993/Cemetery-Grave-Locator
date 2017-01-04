@@ -21,7 +21,7 @@ import org.osmdroid.views.overlay.Marker;
  * Created by bilek on 02.01.2017.
  */
 
-public class DeviceLocation {
+public class DeviceLocation implements LocationListener {
 
     private LocationManager locationManager;
     private Marker locationMarker;
@@ -43,38 +43,6 @@ public class DeviceLocation {
 
     public void getLocation() {
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-        LocationListener locationListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                GeoPoint myPointPosition = new GeoPoint(location);
-
-                if (!locationSaved) {
-                    drawMarker(myPointPosition);
-                    mapController.setCenter(myPointPosition);
-                    locationSaved = true;
-                } else {
-                    mapController.animateTo(myPointPosition);
-
-                    if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
-                        ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-                    }
-                    locationManager.removeUpdates(this);
-                }
-            }
-
-            @Override
-            public void onStatusChanged(String s, int i, Bundle bundle) {
-            }
-
-            @Override
-            public void onProviderEnabled(String s) {
-            }
-
-            @Override
-            public void onProviderDisabled(String s) {
-            }
-        };
 
         if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
@@ -85,11 +53,11 @@ public class DeviceLocation {
 
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             requestedLocation = true;
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
         }
         if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
             requestedLocation = true;
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
         }
 
         if (!requestedLocation) {
@@ -129,5 +97,40 @@ public class DeviceLocation {
         } else {
             return locationMarker.getPosition();
         }
+    }
+
+    public void removeUpdates() {
+        locationManager.removeUpdates(this);
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        GeoPoint myPointPosition = new GeoPoint(location);
+
+        if (!locationSaved) {
+            drawMarker(myPointPosition);
+            mapController.setCenter(myPointPosition);
+            locationSaved = true;
+        } else {
+            mapController.animateTo(myPointPosition);
+
+            if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+                ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            }
+            locationManager.removeUpdates(this);
+        }
+    }
+
+    @Override
+    public void onStatusChanged(String s, int i, Bundle bundle) {
+    }
+
+    @Override
+    public void onProviderEnabled(String s) {
+    }
+
+    @Override
+    public void onProviderDisabled(String s) {
     }
 }
