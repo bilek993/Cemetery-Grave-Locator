@@ -60,6 +60,11 @@ public class GravesAdapter extends RecyclerView.Adapter<GravesAdapter.MyViewHold
         }
     }
 
+    public void refreshData(List<Grave> gravesList) {
+        this.gravesList = gravesList;
+        notifyDataSetChanged();
+    }
+
     public Drawable getRandomCircle() {
         Random random = new Random();
 

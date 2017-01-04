@@ -15,6 +15,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private final int ADD_REQUEST_ID = 92;
+
     private FloatingActionButton floatingActionButtonAdd;
     private RecyclerView recyclerView;
     private GravesAdapter gravesAdapter;
@@ -36,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getBaseContext(), AddGraveActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,ADD_REQUEST_ID);
             }
         });
     }
@@ -51,5 +53,14 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), linearLayoutManager.getOrientation());
         recyclerView.addItemDecoration(dividerItemDecoration);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == ADD_REQUEST_ID) {
+            gravesAdapter.refreshData(db.getAllGraves());
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
