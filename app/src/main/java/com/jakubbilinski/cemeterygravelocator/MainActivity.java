@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         //Temporary list START
         List<Grave> graveList = new ArrayList<Grave>();
         for (int i = 0; i < 100; i++) {
-            Grave graveTmp = new Grave("John Smith", "21.04.1980", "01.01.1999", 50.001, 40.123, null);
+            Grave graveTmp = new Grave("John Smith", "21.04.1980", "01.01.1999");
             graveList.add(graveTmp);
         }
         //Temporary list END
