@@ -16,4 +16,8 @@
     <string name="set">Set</string>
     <string name="new_location_set">New location has been set.</string>
     <string name="select_img">Select image</string>
+    <string name="saving_error">Saving error!</string>
+    <string name="error_empty_text_boxes">One of text boxes is empty. You cannot leave any of them empty.</string>
+    <string name="error_birth_bad_format">Wrong format of birth date. Data should be in format: DD.MM.YY</string>
+    <string name="error_death_bad_format">Wrong format of death date. Data should be in format: DD.MM.YY</string>
 </resources>

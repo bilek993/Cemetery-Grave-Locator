@@ -1,11 +1,13 @@
 package com.jakubbilinski.cemeterygravelocator;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -62,14 +64,47 @@ public class AddGraveActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_item_save_and_add) {
-            DatabaseHelper db = new DatabaseHelper(this);
-            Bitmap bitmap = ((BitmapDrawable)imageViewPhoto.getDrawable()).getBitmap();
-            db.insertGrave(editTextName.getText().toString(),editTextBirth.getText().toString(), editTextDeath.getText().toString(), latitude, longitude, bitmap);
+            if (checkEnteredData(editTextName.getText().toString(),editTextBirth.getText().toString(), editTextDeath.getText().toString())) {
+                DatabaseHelper db = new DatabaseHelper(this);
+                Bitmap bitmap = ((BitmapDrawable) imageViewPhoto.getDrawable()).getBitmap();
+                db.insertGrave(editTextName.getText().toString(), editTextBirth.getText().toString(), editTextDeath.getText().toString(), latitude, longitude, bitmap);
 
-            finish();
+                finish();
+            }
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean checkEnteredData(String name, String data1, String data2) {
+        if (name.isEmpty() || data1.isEmpty() || data2.isEmpty()) {
+            showWrongDataDialog(getString(R.string.error_empty_text_boxes));
+            return false;
+        }
+        if (!data1.matches("[0-9]{2}[.][0-9]{2}[.][0-9]{2}")) {
+            showWrongDataDialog(getString(R.string.error_birth_bad_format));
+            return false;
+        }
+        if (!data2.matches("[0-9]{2}[.][0-9]{2}[.][0-9]{2}")) {
+            showWrongDataDialog(getString(R.string.error_death_bad_format));
+            return false;
+        }
+
+        return true;
+    }
+
+    private void showWrongDataDialog(String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.saving_error));
+        builder.setMessage(message);
+
+        builder.setPositiveButton(R.string.ok_capital, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     private void setButton() {
