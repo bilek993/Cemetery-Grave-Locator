@@ -11,8 +11,8 @@ android {
         applicationId "com.jakubbilinski.cemeterygravelocator"
         minSdkVersion 21
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode 1020170105
+        versionName "1.0.2017.01.05"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
