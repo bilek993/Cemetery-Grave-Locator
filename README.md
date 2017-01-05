@@ -1,8 +1,6 @@
 Welcome to Cemetery Grave Locator!
 ==================================
 
-## Description
-
 <img src="http://jbilinski.pl/img_custom/CemeteryGraveLocatorGrafika3.png" alt="Cemetery Grave Locator - 1" width="384"/>
 <img src="http://jbilinski.pl/img_custom/CemeteryGraveLocatorGrafika2.png" alt="Cemetery Grave Locator - 1" width="384"/>
 
