@@ -1,7 +1,5 @@
 package com.jakubbilinski.cemeterygravelocator;
 
-import android.graphics.Bitmap;
-
 /**
  * Created by bilek on 03.01.2017.
  */
