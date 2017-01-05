@@ -8,14 +8,20 @@ import android.graphics.Bitmap;
 
 public class Grave {
 
+    private int id;
     private String name;
     private String birthDate;
     private String deathDate;
 
-    public Grave(String name, String birthDate, String deathDate) {
+    public Grave(int id, String name, String birthDate, String deathDate) {
+        this.id = id;
         this.name = name;
         this.birthDate = birthDate;
         this.deathDate = deathDate;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {

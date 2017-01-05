@@ -88,7 +88,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         List<Grave> graves = new ArrayList<>();
         StringBuffer stringBuffer = new StringBuffer();
         while (cursor.moveToNext()) {
-            graves.add(new Grave(cursor.getString(1),cursor.getString(2),cursor.getString(3)));
+            graves.add(new Grave(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3)));
         }
 
         return graves;
