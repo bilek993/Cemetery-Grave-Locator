@@ -12,7 +12,7 @@ Welcome to Cemetery Grave Locator!
 
 ## Requirements
 
-* Device with Android OS 5.0
+* Device with Android OS 5.0+
 * Android Studio 2.2.0+ (only if building from source)
 * Android SDK version 21,25 and build tools 23.0.2 (only if building from source)
 
