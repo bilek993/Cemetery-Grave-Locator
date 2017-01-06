@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -92,5 +93,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         return graves;
+    }
+
+    private Cursor getGravesCursorById(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from " + TABLE_GRAVES + " WHERE " + GRAVES_ID + " = " + id, null);
+        return res;
+    }
+
+    public Bundle getOneGrave(int id) {
+        Bundle bundle = new Bundle();
+        Cursor res = getGravesCursorById(id);
+        res.moveToNext();
+
+        Bitmap bitmap = bytesToBitmap(res.getBlob(6));
+        bundle.putParcelable(Tags.PHOTO, bitmap);
+
+        return bundle;
     }
 }

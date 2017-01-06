@@ -49,6 +49,7 @@ public class GravesAdapter extends RecyclerView.Adapter<GravesAdapter.MyViewHold
         holder.textViewDates.setText(gravesList.get(position).getBirthDate() + " - " + gravesList.get(position).getDeathDate());
         holder.textViewInitials.setText(parseInitials(gravesList.get(position).getName()));
         holder.imageViewCircle.setImageDrawable(getRandomCircle());
+        holder.idValue = gravesList.get(position).getId();
     }
 
     public String parseInitials(String nameToParse) {
@@ -113,6 +114,7 @@ public class GravesAdapter extends RecyclerView.Adapter<GravesAdapter.MyViewHold
         TextView textViewDates;
         TextView textViewInitials;
         ImageView imageViewCircle;
+        int idValue;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -130,6 +132,7 @@ public class GravesAdapter extends RecyclerView.Adapter<GravesAdapter.MyViewHold
             Intent intent = new Intent(inflater.getContext() ,DetailsActivity.class);
             activity.getWindow().setEnterTransition(new Fade(Fade.IN));
 
+            intent.putExtra(Tags.ID, idValue);
             intent.putExtra(Tags.NAME, textViewName.getText().toString());
             intent.putExtra(Tags.DATE, textViewDates.getText().toString());
 
