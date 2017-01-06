@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private void setRecyclerView() {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
-        gravesAdapter = new GravesAdapter(this,db.getAllGraves());
+        gravesAdapter = new GravesAdapter(this,this,db.getAllGraves());
         recyclerView.setAdapter(gravesAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

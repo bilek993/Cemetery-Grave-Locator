@@ -1,8 +1,15 @@
 package com.jakubbilinski.cemeterygravelocator;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.RecyclerView;
+import android.transition.Fade;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +18,7 @@ import android.widget.TextView;
 
 import java.util.List;
 import java.util.Random;
+import java.util.zip.Inflater;
 
 /**
  * Created by bilek on 03.01.2017.
@@ -19,10 +27,12 @@ import java.util.Random;
 public class GravesAdapter extends RecyclerView.Adapter<GravesAdapter.MyViewHolder> {
 
     private LayoutInflater inflater;
+    private Activity activity;
     private List<Grave> gravesList;
 
-    public GravesAdapter(Context context, List<Grave> gravesList) {
+    public GravesAdapter(Context context, Activity activity, List<Grave> gravesList) {
         inflater = LayoutInflater.from(context);
+        this.activity = activity;
         this.gravesList = gravesList;
     }
 
@@ -97,7 +107,7 @@ public class GravesAdapter extends RecyclerView.Adapter<GravesAdapter.MyViewHold
         return gravesList.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView textViewName;
         TextView textViewDates;
@@ -107,10 +117,29 @@ public class GravesAdapter extends RecyclerView.Adapter<GravesAdapter.MyViewHold
         public MyViewHolder(View itemView) {
             super(itemView);
 
+            itemView.setOnClickListener(this);
+
             textViewName = (TextView) itemView.findViewById(R.id.textViewName);
             textViewDates = (TextView) itemView.findViewById(R.id.textViewDates);
             textViewInitials = (TextView) itemView.findViewById(R.id.textViewInitials);
             imageViewCircle = (ImageView) itemView.findViewById(R.id.imageViewMulticolorCircle);
+        }
+
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(inflater.getContext() ,DetailsActivity.class);
+            activity.getWindow().setEnterTransition(new Fade(Fade.IN));
+
+            intent.putExtra(Tags.NAME, textViewName.getText().toString());
+            intent.putExtra(Tags.DATE, textViewDates.getText().toString());
+
+            ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    activity,
+                    new Pair<View, String>(view.findViewById(R.id.textViewName),inflater.getContext().getString(R.string.transition_name)),
+                    new Pair<View, String>(view.findViewById(R.id.textViewDates),inflater.getContext().getString(R.string.transition_date))
+            );
+
+            ActivityCompat.startActivity(inflater.getContext(),intent,options.toBundle());
         }
     }
 }

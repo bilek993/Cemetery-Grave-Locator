@@ -21,4 +21,8 @@
     <string name="error_birth_bad_format">Wrong format of birth date. Data should be in format: DD.MM.YY</string>
     <string name="error_death_bad_format">Wrong format of death date. Data should be in format: DD.MM.YY</string>
     <string name="wait_loading">Loading. Please wait...</string>
+
+
+    <string name="transition_name">_transition_name</string>
+    <string name="transition_date">_transition_date</string>
 </resources>

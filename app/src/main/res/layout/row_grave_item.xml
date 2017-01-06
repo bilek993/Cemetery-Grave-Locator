@@ -42,14 +42,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textViewName"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:transitionName="@string/transition_name"/>
 
         <TextView
             android:text="TextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textViewDates"
-            android:textStyle="normal|italic" />
+            android:textStyle="normal|italic"
+            android:transitionName="@string/transition_date"/>
 
     </LinearLayout>
 
