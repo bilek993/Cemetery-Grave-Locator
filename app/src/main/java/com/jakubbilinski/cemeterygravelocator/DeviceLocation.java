@@ -2,6 +2,7 @@ package com.jakubbilinski.cemeterygravelocator;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
@@ -26,6 +27,7 @@ public class DeviceLocation implements LocationListener {
     private LocationManager locationManager;
     private Marker locationMarker;
     private boolean locationSaved;
+    private ProgressDialog loadingDialog;
 
     private IMapController mapController;
     private MapView mapView;
@@ -62,6 +64,8 @@ public class DeviceLocation implements LocationListener {
 
         if (!requestedLocation) {
             showDialogLocationProviderError();
+        } else {
+            showLoading();
         }
     }
 
@@ -91,6 +95,15 @@ public class DeviceLocation implements LocationListener {
         mapView.invalidate();
     }
 
+    private void showLoading() {
+        if (loadingDialog == null)
+            loadingDialog = ProgressDialog.show(activity, "", context.getString(R.string.wait_loading), true);
+    }
+
+    private void hideLoading() {
+        loadingDialog.cancel();
+    }
+
     public GeoPoint getMarkerPosition() {
         if (locationMarker == null) {
             return null;
@@ -100,6 +113,10 @@ public class DeviceLocation implements LocationListener {
     }
 
     public void removeUpdates() {
+        if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
         locationManager.removeUpdates(this);
     }
 
@@ -110,15 +127,11 @@ public class DeviceLocation implements LocationListener {
         if (!locationSaved) {
             drawMarker(myPointPosition);
             mapController.setCenter(myPointPosition);
+            hideLoading();
             locationSaved = true;
         } else {
             mapController.animateTo(myPointPosition);
-
-            if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
-                ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-            }
-            locationManager.removeUpdates(this);
+            removeUpdates();
         }
     }
 
@@ -128,6 +141,7 @@ public class DeviceLocation implements LocationListener {
 
     @Override
     public void onProviderEnabled(String s) {
+
     }
 
     @Override
