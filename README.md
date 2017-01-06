@@ -25,7 +25,7 @@ The latest release version can always be found [here](https://github.com/bilek99
 #### Source code
 
 You can also download latest version of source code using git. To do that enter bellow commands in your terminal:
-> git clone https://github.com/bilek993/Cemetery-Grave-Locato
+> git clone https://github.com/bilek993/Cemetery-Grave-Locator
 
 
 
