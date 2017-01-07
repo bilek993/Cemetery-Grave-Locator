@@ -12,9 +12,10 @@
         app:srcCompat="@drawable/replace"
         android:id="@+id/imageViewPhoto"
         android:layout_height="200dp"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="0dp"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <View
         android:layout_width="0dp"
