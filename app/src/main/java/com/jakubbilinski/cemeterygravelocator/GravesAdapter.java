@@ -139,6 +139,7 @@ public class GravesAdapter extends RecyclerView.Adapter<GravesAdapter.MyViewHold
             ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                     activity,
                     new Pair<View, String>(view.findViewById(R.id.textViewName),inflater.getContext().getString(R.string.transition_name)),
+                    new Pair<View, String>(activity.findViewById(R.id.floatingActionButtonAdd),inflater.getContext().getString(R.string.transition_floating_button)),
                     new Pair<View, String>(view.findViewById(R.id.textViewDates),inflater.getContext().getString(R.string.transition_date))
             );
 

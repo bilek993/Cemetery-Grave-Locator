@@ -25,4 +25,5 @@
 
     <string name="transition_name">_transition_name</string>
     <string name="transition_date">_transition_date</string>
+    <string name="transition_floating_button">_floating_button</string>
 </resources>
