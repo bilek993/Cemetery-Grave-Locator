@@ -109,6 +109,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Bitmap bitmap = bytesToBitmap(res.getBlob(6));
         bundle.putParcelable(Tags.PHOTO, bitmap);
 
+        bundle.putDouble(Tags.MAP_LATITUDE,res.getDouble(4));
+        bundle.putDouble(Tags.MAP_LONGITUDE,res.getDouble(5));
+
         return bundle;
     }
 }

@@ -1,18 +1,28 @@
 package com.jakubbilinski.cemeterygravelocator;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+
+import java.util.Locale;
 
 public class DetailsActivity extends AppCompatActivity {
 
     private TextView textViewName;
     private TextView textViewDate;
     private ImageView imageViewPhoto;
+    private FloatingActionButton floatingActionButtonMap;
+
+    private double latitude;
+    private double longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +33,20 @@ public class DetailsActivity extends AppCompatActivity {
         textViewDate = (TextView) findViewById(R.id.textViewDates);
         imageViewPhoto = (ImageView) findViewById(R.id.imageViewPhoto);
         setData();
+        floatingButton();
+    }
+
+    private void floatingButton() {
+        floatingActionButtonMap = (FloatingActionButton) findViewById(R.id.floatingActionButtonAddToMap);
+        floatingActionButtonMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //String uri = String.format(Locale.ENGLISH, "geo:%f,%f", latitude, longitude);
+                String uri = "http://maps.google.com/maps?q=loc:" + latitude + "," + longitude + " (" + getIntent().getExtras().getString(Tags.NAME) + ")";;
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                startActivity(intent);
+            }
+        });
     }
 
     private void setData() {
@@ -31,6 +55,9 @@ public class DetailsActivity extends AppCompatActivity {
 
         textViewName.setText(getIntent().getExtras().getString(Tags.NAME));
         textViewDate.setText(getIntent().getExtras().getString(Tags.DATE));
+
+        latitude = bundle.getDouble(Tags.MAP_LATITUDE);
+        longitude = bundle.getDouble(Tags.MAP_LONGITUDE);
 
         Bitmap bitmap = bundle.getParcelable(Tags.PHOTO);
         imageViewPhoto.setImageBitmap(bitmap);
