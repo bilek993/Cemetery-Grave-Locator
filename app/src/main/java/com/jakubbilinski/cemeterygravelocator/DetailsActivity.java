@@ -41,7 +41,6 @@ public class DetailsActivity extends AppCompatActivity {
         floatingActionButtonMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //String uri = String.format(Locale.ENGLISH, "geo:%f,%f", latitude, longitude);
                 String uri = "http://maps.google.com/maps?q=loc:" + latitude + "," + longitude + " (" + getIntent().getExtras().getString(Tags.NAME) + ")";;
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
                 startActivity(intent);
