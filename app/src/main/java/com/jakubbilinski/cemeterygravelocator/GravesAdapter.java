@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
@@ -18,7 +17,6 @@ import android.widget.TextView;
 
 import java.util.List;
 import java.util.Random;
-import java.util.zip.Inflater;
 
 /**
  * Created by bilek on 03.01.2017.

@@ -3,18 +3,12 @@ package com.jakubbilinski.cemeterygravelocator;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
-
-import java.util.Locale;
 
 public class DetailsActivity extends AppCompatActivity {
 
