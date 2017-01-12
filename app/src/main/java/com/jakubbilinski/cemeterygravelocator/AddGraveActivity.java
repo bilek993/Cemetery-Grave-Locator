@@ -32,6 +32,7 @@ public class AddGraveActivity extends AppCompatActivity {
     private EditText editTextName;
     private EditText editTextBirth;
     private EditText editTextDeath;
+    private EditText editTextNote;
     private ImageView imageViewPhoto;
 
     @Override
@@ -45,6 +46,7 @@ public class AddGraveActivity extends AppCompatActivity {
         editTextName = (EditText) findViewById(R.id.editTextName);
         editTextBirth = (EditText) findViewById(R.id.editTextBirth);
         editTextDeath = (EditText) findViewById(R.id.editTextDeath);
+        editTextNote = (EditText) findViewById(R.id.editTextNote);
         imageViewPhoto = (ImageView) findViewById(R.id.imageViewPhoto);
 
         setButton();
@@ -63,7 +65,7 @@ public class AddGraveActivity extends AppCompatActivity {
             if (checkEnteredData(editTextName.getText().toString(),editTextBirth.getText().toString(), editTextDeath.getText().toString())) {
                 DatabaseHelper db = new DatabaseHelper(this);
                 Bitmap bitmap = ((BitmapDrawable) imageViewPhoto.getDrawable()).getBitmap();
-                db.insertGrave(editTextName.getText().toString(), editTextBirth.getText().toString(), editTextDeath.getText().toString(), latitude, longitude, bitmap);
+                db.insertGrave(editTextName.getText().toString(), editTextBirth.getText().toString(), editTextDeath.getText().toString(), latitude, longitude, bitmap, editTextNote.getText().toString());
 
                 finish();
             }

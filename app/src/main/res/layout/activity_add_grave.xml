@@ -57,10 +57,6 @@
                     android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="10dp" />
-
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -72,6 +68,10 @@
                     android:id="@+id/editTextNote"
                     android:inputType="textMultiLine"/>
             </android.support.design.widget.TextInputLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
 
             <TextView
                 android:text="@string/location"

@@ -19,7 +19,7 @@ import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_CURRENT_VERSION = 1;
+    private static final int DATABASE_CURRENT_VERSION = 2;
     private static final String DATABASE_NAME = "UserDatabase.db";
 
     private final String TABLE_GRAVES = "graves";
@@ -30,6 +30,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private final String GRAVES_LATITUDE = "lati";
     private final String GRAVES_LONGITUDE = "long";
     private final String GRAVES_PHOTO = "photo";
+    private final String GRAVES_NOTE = "note";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_CURRENT_VERSION);
@@ -40,14 +41,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + TABLE_GRAVES + " (" + GRAVES_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + GRAVES_NAME + " TEXT, " + GRAVES_BIRTH + " TEXT, " + GRAVES_DEATH + " TEXT, "
                 + GRAVES_LATITUDE + " TEXT, " + GRAVES_LONGITUDE + " TEXT, "
-                + GRAVES_PHOTO + " BLOB)");
+                + GRAVES_PHOTO + " BLOB, " + GRAVES_NOTE + " TEXT)");
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        // There is only one version possible. If version is other than default, reset database.
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_GRAVES);
-        onCreate(db);
+    public void onUpgrade(SQLiteDatabase db, int oldVer, int newVer) {
+        while (oldVer < newVer) {
+            if (oldVer == 1) {
+                db.execSQL("ALTER TABLE " + TABLE_GRAVES + " ADD COLUMN " + GRAVES_NOTE + " TEXT");
+            }
+            oldVer++;
+        }
     }
 
     private byte[] bitmapToBytes(Bitmap bitmap) {
@@ -60,7 +64,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return BitmapFactory.decodeByteArray(image, 0, image.length);
     }
 
-    public void insertGrave(String name, String birth, String death, double latitude, double longitude, Bitmap photo) {
+    public void insertGrave(String name, String birth, String death, double latitude, double longitude, Bitmap photo, String note) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
@@ -70,6 +74,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(GRAVES_LATITUDE,String.valueOf(latitude));
         contentValues.put(GRAVES_LONGITUDE,String.valueOf(longitude));
         contentValues.put(GRAVES_PHOTO,bitmapToBytes(photo));
+        contentValues.put(GRAVES_NOTE, note);
 
         db.insert(TABLE_GRAVES, null, contentValues);
     }
@@ -111,6 +116,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         bundle.putDouble(Tags.MAP_LATITUDE,res.getDouble(4));
         bundle.putDouble(Tags.MAP_LONGITUDE,res.getDouble(5));
+        bundle.putString(Tags.NOTE,res.getString(7));
 
         return bundle;
     }

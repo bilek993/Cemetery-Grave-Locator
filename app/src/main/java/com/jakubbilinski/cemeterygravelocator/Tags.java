@@ -12,4 +12,5 @@ public class Tags {
     static String NAME = "_name";
     static String DATE = "_date";
     static String PHOTO = "_photo";
+    static String NOTE = "_note";
 }
