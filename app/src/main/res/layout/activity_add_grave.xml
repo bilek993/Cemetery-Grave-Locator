@@ -27,7 +27,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/name"
-                    android:id="@+id/editTextName" />
+                    android:id="@+id/editTextName"
+                    android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -39,7 +40,8 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/birth_date"
                     android:inputType="date"
-                    android:id="@+id/editTextBirth" />
+                    android:id="@+id/editTextBirth"
+                    android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -51,12 +53,25 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/death_date"
                     android:inputType="date"
-                    android:id="@+id/editTextDeath" />
+                    android:id="@+id/editTextDeath"
+                    android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="10dp" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/note"
+                    android:id="@+id/editTextNote"
+                    android:inputType="textMultiLine"/>
+            </android.support.design.widget.TextInputLayout>
 
             <TextView
                 android:text="@string/location"
