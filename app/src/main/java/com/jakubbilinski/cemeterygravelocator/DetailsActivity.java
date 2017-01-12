@@ -12,12 +12,15 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import java.util.Locale;
 
 public class DetailsActivity extends AppCompatActivity {
 
     private TextView textViewName;
     private TextView textViewDate;
+    private TextView textViewNote;
     private ImageView imageViewPhoto;
     private FloatingActionButton floatingActionButtonMap;
 
@@ -31,6 +34,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         textViewName = (TextView) findViewById(R.id.textViewName);
         textViewDate = (TextView) findViewById(R.id.textViewDates);
+        textViewNote = (TextView) findViewById(R.id.textViewNoteContent);
         imageViewPhoto = (ImageView) findViewById(R.id.imageViewPhoto);
         setData();
         floatingButton();
@@ -54,6 +58,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         textViewName.setText(getIntent().getExtras().getString(Tags.NAME));
         textViewDate.setText(getIntent().getExtras().getString(Tags.DATE));
+        textViewNote.setText(bundle.getString(Tags.NOTE));
 
         latitude = bundle.getDouble(Tags.MAP_LATITUDE);
         longitude = bundle.getDouble(Tags.MAP_LONGITUDE);
