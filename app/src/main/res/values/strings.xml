@@ -22,6 +22,7 @@
     <string name="error_death_bad_format">Wrong format of death date. Data should be in format: DD.MM.YY</string>
     <string name="wait_loading">Loading. Please wait...</string>
     <string name="note">Note</string>
+    <string name="note_colon">Note:</string>
 
 
     <string name="transition_name">_transition_name</string>
