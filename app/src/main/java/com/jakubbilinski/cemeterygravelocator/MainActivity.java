@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private GravesAdapter gravesAdapter;
     private DatabaseHelper db;
+    private boolean isReadyToExit = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (isReadyToExit) {
+            finish();
+        } else {
+            Toast.makeText(this, getString(R.string.press_back_button_to_exit), Toast.LENGTH_LONG).show();
+            isReadyToExit = true;
+        }
     }
 
     private void setFloatingActionButton() {
