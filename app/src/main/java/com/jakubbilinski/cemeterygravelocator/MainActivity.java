@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main,menu);
-        SearchView searchView = (SearchView) menu.findItem(R.id.menuSearcher).getActionView();
+        SearchView searchView = (SearchView) menu.findItem(R.id.menu_searcher).getActionView();
         searchView.setMaxWidth(Integer.MAX_VALUE);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -58,6 +59,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_settings) {
+
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

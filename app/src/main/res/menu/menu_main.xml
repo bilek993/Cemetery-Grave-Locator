@@ -2,10 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/menuSearcher"
+    <item android:id="@+id/menu_searcher"
         android:title="@string/search"
-        android:icon="@android:drawable/ic_menu_search"
+        android:icon="@drawable/ic_search_white_24dp"
         app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="always" />
+
+    <item android:id="@+id/menu_settings"
+        android:title="@string/settings"
+        android:icon="@drawable/ic_settings_white_24dp"
         app:showAsAction="always" />
 
 </menu>
