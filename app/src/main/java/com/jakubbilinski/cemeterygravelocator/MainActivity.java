@@ -1,7 +1,10 @@
 package com.jakubbilinski.cemeterygravelocator;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceFragment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -64,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_settings) {
-
+            startActivity(new Intent(this, PreferencesMainActivity.class));
         }
 
         return super.onOptionsItemSelected(item);
