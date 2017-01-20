@@ -126,7 +126,8 @@ public class GravesAdapter extends RecyclerView.Adapter<GravesAdapter.MyViewHold
                         for ( final Grave g : originalGravesList) {
                             if (g.getName().toLowerCase().contains(charSequence.toString()) ||
                                     g.getBirthDate().toLowerCase().contains(charSequence.toString()) ||
-                                    g.getDeathDate().toLowerCase().contains(charSequence.toString())) {
+                                    g.getDeathDate().toLowerCase().contains(charSequence.toString()) ||
+                                    g.getNote().toLowerCase().contains(charSequence.toString())) {
                                 results.add(g);
                             }
                         }

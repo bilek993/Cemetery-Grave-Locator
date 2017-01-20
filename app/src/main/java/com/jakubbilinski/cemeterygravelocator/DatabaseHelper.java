@@ -93,7 +93,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         List<Grave> graves = new ArrayList<>();
         while (cursor.moveToNext()) {
-            graves.add(new Grave(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3)));
+            String note;
+            if (cursor.getString(7) == null)
+                note = "";
+            else
+                note = cursor.getString(7);
+
+            graves.add(new Grave(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),note));
         }
 
         return graves;
