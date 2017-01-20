@@ -119,12 +119,14 @@ public class GravesAdapter extends RecyclerView.Adapter<GravesAdapter.MyViewHold
                     originalGravesList = gravesList;
 
                 if (charSequence != null){
+                    String searchedValue = charSequence.toString().toLowerCase();
+
                     if(originalGravesList !=null & originalGravesList.size()>0 ){
                         for ( final Grave g : originalGravesList) {
-                            if (g.getName().toLowerCase().contains(charSequence.toString()) ||
-                                    g.getBirthDate().toLowerCase().contains(charSequence.toString()) ||
-                                    g.getDeathDate().toLowerCase().contains(charSequence.toString()) ||
-                                    g.getNote().toLowerCase().contains(charSequence.toString())) {
+                            if (g.getName().toLowerCase().contains(searchedValue) ||
+                                    g.getBirthDate().toLowerCase().contains(searchedValue) ||
+                                    g.getDeathDate().toLowerCase().contains(searchedValue) ||
+                                    g.getNote().toLowerCase().contains(searchedValue)) {
                                 results.add(g);
                             }
                         }
