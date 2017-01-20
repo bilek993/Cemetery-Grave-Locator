@@ -12,9 +12,12 @@ import android.transition.Fade;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -22,11 +25,12 @@ import java.util.Random;
  * Created by bilek on 03.01.2017.
  */
 
-public class GravesAdapter extends RecyclerView.Adapter<GravesAdapter.MyViewHolder> {
+public class GravesAdapter extends RecyclerView.Adapter<GravesAdapter.MyViewHolder> implements Filterable {
 
     private LayoutInflater inflater;
     private Activity activity;
     private List<Grave> gravesList;
+    private List<Grave> originalGravesList;
 
     public GravesAdapter(Context context, Activity activity, List<Grave> gravesList) {
         inflater = LayoutInflater.from(context);
@@ -104,6 +108,41 @@ public class GravesAdapter extends RecyclerView.Adapter<GravesAdapter.MyViewHold
     @Override
     public int getItemCount() {
         return gravesList.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                final FilterResults oReturn = new FilterResults();
+                final List<Grave> results = new ArrayList<>();
+
+                if (originalGravesList == null)
+                    originalGravesList = gravesList;
+
+                if (charSequence != null){
+                    if(originalGravesList !=null & originalGravesList.size()>0 ){
+                        for ( final Grave g : originalGravesList) {
+                            if (g.getName().toLowerCase().contains(charSequence.toString()) ||
+                                    g.getBirthDate().toLowerCase().contains(charSequence.toString()) ||
+                                    g.getDeathDate().toLowerCase().contains(charSequence.toString())) {
+                                results.add(g);
+                            }
+                        }
+                    }
+                    oReturn.values = results;
+                }
+
+                return oReturn;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                gravesList = (ArrayList<Grave>)filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
