@@ -12,6 +12,7 @@ import android.os.Bundle;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by bilek on 04.01.2017.
@@ -32,8 +33,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private final String GRAVES_PHOTO = "photo";
     private final String GRAVES_NOTE = "note";
 
+    private Random random;
+
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_CURRENT_VERSION);
+        random = new Random();
     }
 
     @Override
@@ -99,7 +103,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             else
                 note = cursor.getString(7);
 
-            graves.add(new Grave(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),note));
+            graves.add(new Grave(cursor.getInt(0), random.nextInt(9),cursor.getString(1),cursor.getString(2),cursor.getString(3),note));
         }
 
         return graves;

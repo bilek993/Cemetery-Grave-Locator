@@ -50,7 +50,7 @@ public class GravesAdapter extends RecyclerView.Adapter<GravesAdapter.MyViewHold
         holder.textViewName.setText(gravesList.get(position).getName());
         holder.textViewDates.setText(gravesList.get(position).getBirthDate() + " - " + gravesList.get(position).getDeathDate());
         holder.textViewInitials.setText(parseInitials(gravesList.get(position).getName()));
-        holder.imageViewCircle.setImageDrawable(getRandomCircle());
+        holder.imageViewCircle.setImageDrawable(getCircleColor(position));
         holder.idValue = gravesList.get(position).getId();
     }
 
@@ -78,10 +78,8 @@ public class GravesAdapter extends RecyclerView.Adapter<GravesAdapter.MyViewHold
         notifyDataSetChanged();
     }
 
-    public Drawable getRandomCircle() {
-        Random random = new Random();
-
-        switch (random.nextInt(9)) {
+    public Drawable getCircleColor(int position) {
+        switch (gravesList.get(position).getColor()) {
             case 0:
                 return inflater.getContext().getDrawable(R.drawable.circle_100);
             case 1:
