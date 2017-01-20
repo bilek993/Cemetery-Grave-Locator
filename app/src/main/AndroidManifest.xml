@@ -43,9 +43,7 @@
             android:launchMode="singleTask"
             android:parentActivityName=".AddGraveActivity" />
         <activity android:name=".DetailsActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:launchMode="singleTask"
-            android:parentActivityName=".MainActivity" />
+            android:configChanges="orientation|keyboardHidden|screenSize" />
     </application>
 
 </manifest>
