@@ -26,9 +26,27 @@
     <string name="search">Search</string>
     <string name="press_back_button_to_exit">Press back button again to exit.</string>
     <string name="settings">Settings</string>
+    <string name="category_map">Map category</string>
+    <string name="map_provider">Map provider</string>
 
 
     <string name="transition_name">_transition_name</string>
     <string name="transition_date">_transition_date</string>
     <string name="transition_floating_button">_floating_button</string>
+    
+    
+    <string-array name="maps_providers_array">
+        <item>CYCLEMAP</item>
+        <item>BASE OVERLAY NL</item>
+        <item>HIKEBIKEMAP</item>
+        <item>MAPNIK</item>
+        <item>USGS_SAT</item>
+    </string-array>
+    <string-array name="maps_providers_array_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
 </resources>

@@ -2,7 +2,9 @@ package com.jakubbilinski.cemeterygravelocator;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,11 +24,13 @@ public class MapSelectActivity extends AppCompatActivity implements MapEventsRec
     private IMapController mapController;
     private MapEventsOverlay mapEventsOverlay;
     private DeviceLocation deviceLocation;
+    private SharedPreferences preferencesMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_select);
+        preferencesMain = PreferenceManager.getDefaultSharedPreferences(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         PermissionChecker.checkForPermissions(this);
@@ -78,13 +82,36 @@ public class MapSelectActivity extends AppCompatActivity implements MapEventsRec
     private void enableMaps() {
         OpenStreetMapTileProviderConstants.setUserAgentValue(BuildConfig.APPLICATION_ID);
         map = (MapView) findViewById(R.id.map);
-        map.setTileSource(TileSourceFactory.MAPNIK);
+        setMapSource();
 
         map.setBuiltInZoomControls(true);
         map.setMultiTouchControls(true);
 
         mapController = map.getController();
         mapController.setZoom(20);
+    }
+
+    private void setMapSource() {
+        switch (Integer.valueOf(preferencesMain.getString("pref_map_provider","3"))) {
+            case 0:
+                map.setTileSource(TileSourceFactory.CYCLEMAP);
+                break;
+            case 1:
+                map.setTileSource(TileSourceFactory.BASE_OVERLAY_NL);
+                break;
+            case 2:
+                map.setTileSource(TileSourceFactory.HIKEBIKEMAP);
+                break;
+            case 3:
+                map.setTileSource(TileSourceFactory.MAPNIK);
+                break;
+            case 4:
+                map.setTileSource(TileSourceFactory.USGS_SAT);
+                break;
+            default:
+                map.setTileSource(TileSourceFactory.MAPNIK);
+                break;
+        }
     }
 
     @Override
