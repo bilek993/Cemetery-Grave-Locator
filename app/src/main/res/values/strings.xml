@@ -23,6 +23,7 @@
     <string name="wait_loading">Loading. Please wait...</string>
     <string name="note">Note</string>
     <string name="note_colon">Note:</string>
+    <string name="search">Search</string>
 
 
     <string name="transition_name">_transition_name</string>
