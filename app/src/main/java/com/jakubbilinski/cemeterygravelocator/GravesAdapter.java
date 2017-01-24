@@ -83,6 +83,10 @@ public class GravesAdapter extends RecyclerView.Adapter<GravesAdapter.MyViewHold
         originalGravesList = null;
     }
 
+    public int getGraveId(int position) {
+        return gravesList.get(position).getId();
+    }
+
     public Drawable getCircleColor(int position) {
         switch (gravesList.get(position).getColor()) {
             case 0:

@@ -129,4 +129,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return bundle;
     }
+
+    public void removeGraveById(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_GRAVES, GRAVES_ID + "=" + String.valueOf(id),null);
+        db.close();
+    }
 }
