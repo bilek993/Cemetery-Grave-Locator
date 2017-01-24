@@ -80,6 +80,7 @@ public class GravesAdapter extends RecyclerView.Adapter<GravesAdapter.MyViewHold
     public void removeItem(int position) {
         gravesList.remove(position);
         notifyItemRemoved(position);
+        originalGravesList = null;
     }
 
     public Drawable getCircleColor(int position) {
