@@ -1,7 +1,6 @@
 package com.jakubbilinski.cemeterygravelocator;
 
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 
 /**

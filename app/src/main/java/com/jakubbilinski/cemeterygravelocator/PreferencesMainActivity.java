@@ -2,9 +2,9 @@ package com.jakubbilinski.cemeterygravelocator;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 public class PreferencesMainActivity extends AppCompatActivity {
 
