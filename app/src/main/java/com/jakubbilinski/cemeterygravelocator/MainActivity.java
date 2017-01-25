@@ -162,6 +162,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == ADD_REQUEST_ID) {
+            if (preferencesMain.getBoolean("pref_snackbar",true))
+                Snackbar.make(recyclerView, getString(R.string.item_added), Snackbar.LENGTH_LONG).show();
+
             gravesAdapter.refreshData(db.getAllGraves());
         }
 

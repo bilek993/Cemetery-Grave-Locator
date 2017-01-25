@@ -31,6 +31,7 @@
     <string name="category_main_screen">Main screen category:</string>
     <string name="switch_show_snackbar">Show snackbar</string>
     <string name="item_removed">Item has been removed.</string>
+    <string name="item_added">Item has been added.</string>
     <string name="undo_upper">UNDO</string>
 
 
