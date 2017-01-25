@@ -30,6 +30,8 @@
     <string name="map_provider">Map provider</string>
     <string name="category_main_screen">Main screen category:</string>
     <string name="switch_show_snackbar">Show snackbar</string>
+    <string name="item_removed">Item has been removed.</string>
+    <string name="undo_upper">UNDO</string>
 
 
     <string name="transition_name">_transition_name</string>

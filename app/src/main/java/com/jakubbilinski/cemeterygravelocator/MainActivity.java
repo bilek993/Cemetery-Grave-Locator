@@ -3,9 +3,12 @@ package com.jakubbilinski.cemeterygravelocator;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private GravesAdapter gravesAdapter;
     private DatabaseHelper db;
     private boolean isReadyToExit = false;
+    private SharedPreferences preferencesMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         db = new DatabaseHelper(this);
+        preferencesMain = PreferenceManager.getDefaultSharedPreferences(this);
         setFloatingActionButton();
         setRecyclerView();
         PermissionChecker.checkForPermissions(this);
@@ -122,9 +127,32 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                int idItemToRemove = gravesAdapter.getGraveId(viewHolder.getAdapterPosition());
-                db.removeGraveById(idItemToRemove);
-                gravesAdapter.removeItem(viewHolder.getAdapterPosition());
+                final int positonRemovedItem = viewHolder.getAdapterPosition();
+                final int idItemToRemove = gravesAdapter.getGraveId(positonRemovedItem);
+                final Grave removedGrave = gravesAdapter.removeItem(positonRemovedItem);
+
+                if (preferencesMain.getBoolean("pref_snackbar",true)) {
+                    Snackbar snackbar = Snackbar
+                            .make(recyclerView, getString(R.string.item_removed), Snackbar.LENGTH_LONG)
+                            .setAction(getString(R.string.undo_upper), new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    gravesAdapter.restoreItem(positonRemovedItem, removedGrave);
+                                }
+                            });
+
+                    snackbar.addCallback(new Snackbar.Callback() {
+                        @Override
+                        public void onDismissed(Snackbar snackbar, int event) {
+                            if (event == Snackbar.Callback.DISMISS_EVENT_TIMEOUT)
+                                db.removeGraveById(idItemToRemove);
+                        }
+                    });
+
+                    snackbar.show();
+                } else {
+                    db.removeGraveById(idItemToRemove);
+                }
             }
         };
 

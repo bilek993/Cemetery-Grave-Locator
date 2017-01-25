@@ -77,9 +77,17 @@ public class GravesAdapter extends RecyclerView.Adapter<GravesAdapter.MyViewHold
         notifyDataSetChanged();
     }
 
-    public void removeItem(int position) {
+    public Grave removeItem(int position) {
+        Grave removedGraved = gravesList.get(position);
         gravesList.remove(position);
         notifyItemRemoved(position);
+        originalGravesList = null;
+        return removedGraved;
+    }
+
+    public void restoreItem(int positon, Grave grave) {
+        gravesList.add(positon, grave);
+        notifyItemInserted(positon);
         originalGravesList = null;
     }
 
