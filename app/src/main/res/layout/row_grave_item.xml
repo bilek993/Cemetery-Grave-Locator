@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="55dp">
 
@@ -17,7 +18,8 @@
             app:srcCompat="@drawable/circle_500"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:id="@+id/imageViewMulticolorCircle" />
+            android:id="@+id/imageViewMulticolorCircle"
+            android:contentDescription="@string/circle_initials" />
 
         <TextView
             android:text="TV"
@@ -28,7 +30,8 @@
             android:id="@+id/textViewInitials"
             android:textAlignment="center"
             android:textColor="@android:color/background_light"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:ignore="HardcodedText" />
 
     </RelativeLayout>
 
@@ -43,7 +46,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/textViewName"
             android:textSize="24sp"
-            android:transitionName="@string/transition_name"/>
+            android:transitionName="@string/transition_name"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:text="TextView"
@@ -51,7 +55,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/textViewDates"
             android:textStyle="normal|italic"
-            android:transitionName="@string/transition_date"/>
+            android:transitionName="@string/transition_date"
+            tools:ignore="HardcodedText" />
 
     </LinearLayout>
 
