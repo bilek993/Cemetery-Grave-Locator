@@ -1,5 +1,6 @@
 package com.jakubbilinski.cemeterygravelocator;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -158,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == ADD_REQUEST_ID) {
-            if (preferencesMain.getBoolean("pref_snackbar",true))
+            if (preferencesMain.getBoolean("pref_snackbar",true) && resultCode == Activity.RESULT_OK)
                 Snackbar.make(recyclerView, getString(R.string.item_added), Snackbar.LENGTH_LONG).show();
 
             gravesAdapter.refreshData(db.getAllGraves());

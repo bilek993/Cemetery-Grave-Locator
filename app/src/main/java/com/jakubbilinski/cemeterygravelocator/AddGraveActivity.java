@@ -67,6 +67,7 @@ public class AddGraveActivity extends AppCompatActivity {
                 Bitmap bitmap = ((BitmapDrawable) imageViewPhoto.getDrawable()).getBitmap();
                 db.insertGrave(editTextName.getText().toString(), editTextBirth.getText().toString(), editTextDeath.getText().toString(), latitude, longitude, bitmap, editTextNote.getText().toString());
 
+                setResult(Activity.RESULT_OK);
                 finish();
             }
         }
