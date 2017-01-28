@@ -74,7 +74,7 @@ public class DeviceLocation implements LocationListener {
         builder.setTitle(context.getString(R.string.no_location_services_title));
         builder.setMessage(context.getString(R.string.no_location_services));
 
-        builder.setPositiveButton(R.string.ok_capital, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(context.getString(R.string.ok_capital), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
             }
         });

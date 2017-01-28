@@ -97,7 +97,7 @@ public class AddGraveActivity extends AppCompatActivity {
         builder.setTitle(getString(R.string.saving_error));
         builder.setMessage(message);
 
-        builder.setPositiveButton(R.string.ok_capital, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.ok_capital), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
             }
         });
