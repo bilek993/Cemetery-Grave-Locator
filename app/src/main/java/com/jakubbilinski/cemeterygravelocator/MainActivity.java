@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         if (isReadyToExit) {
-            finish();
+            finishAffinity();
         } else {
             Toast.makeText(this, getString(R.string.press_back_button_to_exit), Toast.LENGTH_LONG).show();
             isReadyToExit = true;
