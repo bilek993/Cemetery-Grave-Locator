@@ -73,6 +73,9 @@ public class MainActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.menu_settings) {
             startActivity(new Intent(this, PreferencesMainActivity.class));
         }
+        else if (item.getItemId() == R.id.menu_close_app) {
+            finishAffinity();
+        }
 
         return super.onOptionsItemSelected(item);
     }
