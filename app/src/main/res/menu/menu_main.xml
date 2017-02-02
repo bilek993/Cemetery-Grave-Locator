@@ -11,6 +11,14 @@
     <item android:id="@+id/menu_settings"
         android:title="@string/settings"
         android:icon="@drawable/ic_settings_white_24dp"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
+
+    <item android:id="@+id/menu_import_export"
+        android:title="@string/import_export"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/menu_close_app"
+        android:title="@string/close_app"
+        app:showAsAction="never" />
 
 </menu>

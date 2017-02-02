@@ -35,6 +35,8 @@
     <string name="undo_upper">UNDO</string>
     <string name="photo_of_grave">Photo of grave.</string>
     <string name="circle_initials">Circle with initials.</string>
+    <string name="import_export">Import/Export</string>
+    <string name="close_app">Exit</string>
 
 
     <string name="transition_name">_transition_name</string>
