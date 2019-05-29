@@ -1,8 +1,8 @@
 Welcome to Cemetery Grave Locator!
 ==================================
 
-<img src="http://jbilinski.pl/img_custom/CemeteryGraveLocatorGrafika3.png" alt="Cemetery Grave Locator - 1" width="384"/>
-<img src="http://jbilinski.pl/img_custom/CemeteryGraveLocatorGrafika2.png" alt="Cemetery Grave Locator - 1" width="384"/>
+![Cemetery Grave Locator - 1](.docs/img1.png)
+![Cemetery Grave Locator - 2](.docs/img2.png)
 
 **Cemetery Grave Locator** is free and open source ([Apache-2.0](LICENSE)) Android application, which is going to help you locate graves. Store graves location in SQLite database and locate them easily and fast. You no longer need to search for graves all day long!
 
